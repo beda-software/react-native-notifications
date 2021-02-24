@@ -1,12 +1,13 @@
-import { NativeModules } from 'react-native';
-import { Notification } from '../DTO/Notification';
-import { NotificationCompletion } from '../interfaces/NotificationCompletion';
-import { NotificationPermissions } from '../interfaces/NotificationPermissions';
-import { NotificationCategory } from '../interfaces/NotificationCategory';
-import { NotificationChannel } from '../interfaces/NotificationChannel';
+import { NativeModules } from "react-native";
+import { Notification } from "../DTO/Notification";
+import { NotificationCompletion } from "../interfaces/NotificationCompletion";
+import { NotificationPermissions } from "../interfaces/NotificationPermissions";
+import { NotificationCategory } from "../interfaces/NotificationCategory";
+import { NotificationChannel } from "../interfaces/NotificationChannel";
 
 interface NativeCommandsModule {
   getInitialNotification(): Promise<Object>;
+  getLastAction(): Promise<Object>;
   postLocalNotification(notification: Notification, id: number): void;
   requestPermissions(): void;
   abandonPermissions(): void;
@@ -22,10 +23,16 @@ interface NativeCommandsModule {
   removeAllDeliveredNotifications(): void;
   getDeliveredNotifications(): Promise<Notification[]>;
   setCategories(categories: [NotificationCategory?]): void;
-  finishPresentingNotification(notificationId: string, callback: NotificationCompletion): void;
+  finishPresentingNotification(
+    notificationId: string,
+    callback: NotificationCompletion
+  ): void;
   finishHandlingAction(notificationId: string): void;
   setNotificationChannel(notificationChannel: NotificationChannel): void;
-  finishHandlingBackgroundAction(notificationId: string, backgroundFetchResult: string): void;
+  finishHandlingBackgroundAction(
+    notificationId: string,
+    backgroundFetchResult: string
+  ): void;
 }
 
 export class NativeCommandsSender {
@@ -41,7 +48,11 @@ export class NativeCommandsSender {
   getInitialNotification(): Promise<Object> {
     return this.nativeCommandsModule.getInitialNotification();
   }
-  
+
+  getLastAction(): Promise<Object> {
+    return this.nativeCommandsModule.getLastAction();
+  }
+
   requestPermissions() {
     return this.nativeCommandsModule.requestPermissions();
   }
@@ -98,8 +109,14 @@ export class NativeCommandsSender {
     return this.nativeCommandsModule.getDeliveredNotifications();
   }
 
-  finishPresentingNotification(notificationId: string, notificationCompletion: NotificationCompletion): void {
-    this.nativeCommandsModule.finishPresentingNotification(notificationId, notificationCompletion);
+  finishPresentingNotification(
+    notificationId: string,
+    notificationCompletion: NotificationCompletion
+  ): void {
+    this.nativeCommandsModule.finishPresentingNotification(
+      notificationId,
+      notificationCompletion
+    );
   }
 
   finishHandlingAction(notificationId: string): void {
@@ -110,7 +127,13 @@ export class NativeCommandsSender {
     this.nativeCommandsModule.setNotificationChannel(notificationChannel);
   }
 
-  finishHandlingBackgroundAction(notificationId: string, backgroundFetchResult: string): void {
-    this.nativeCommandsModule.finishHandlingBackgroundAction(notificationId, backgroundFetchResult);
+  finishHandlingBackgroundAction(
+    notificationId: string,
+    backgroundFetchResult: string
+  ): void {
+    this.nativeCommandsModule.finishHandlingBackgroundAction(
+      notificationId,
+      backgroundFetchResult
+    );
   }
 }

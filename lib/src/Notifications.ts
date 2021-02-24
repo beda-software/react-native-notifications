@@ -1,16 +1,16 @@
-import { NativeCommandsSender } from './adapters/NativeCommandsSender';
-import { NativeEventsReceiver } from './adapters/NativeEventsReceiver';
-import { Commands } from './commands/Commands';
-import { EventsRegistry } from './events/EventsRegistry';
-import { EventsRegistryIOS } from './events/EventsRegistryIOS';
-import { Notification } from './DTO/Notification';
-import { UniqueIdProvider } from './adapters/UniqueIdProvider';
-import { CompletionCallbackWrapper } from './adapters/CompletionCallbackWrapper';
-import { NotificationCategory } from './interfaces/NotificationCategory';
-import { NotificationChannel } from './interfaces/NotificationChannel';
-import { NotificationsIOS } from './NotificationsIOS';
-import { NotificationsAndroid } from './NotificationsAndroid';
-import { NotificationFactory } from './DTO/NotificationFactory';
+import { NativeCommandsSender } from "./adapters/NativeCommandsSender";
+import { NativeEventsReceiver } from "./adapters/NativeEventsReceiver";
+import { Commands } from "./commands/Commands";
+import { EventsRegistry } from "./events/EventsRegistry";
+import { EventsRegistryIOS } from "./events/EventsRegistryIOS";
+import { Notification } from "./DTO/Notification";
+import { UniqueIdProvider } from "./adapters/UniqueIdProvider";
+import { CompletionCallbackWrapper } from "./adapters/CompletionCallbackWrapper";
+import { NotificationCategory } from "./interfaces/NotificationCategory";
+import { NotificationChannel } from "./interfaces/NotificationChannel";
+import { NotificationsIOS } from "./NotificationsIOS";
+import { NotificationsAndroid } from "./NotificationsAndroid";
+import { NotificationFactory } from "./DTO/NotificationFactory";
 
 export class NotificationsRoot {
   public readonly _ios: NotificationsIOS;
@@ -27,17 +27,27 @@ export class NotificationsRoot {
 
   constructor() {
     this.notificationFactory = new NotificationFactory();
-    this.nativeEventsReceiver = new NativeEventsReceiver(this.notificationFactory);
+    this.nativeEventsReceiver = new NativeEventsReceiver(
+      this.notificationFactory
+    );
     this.nativeCommandsSender = new NativeCommandsSender();
-    this.completionCallbackWrapper = new CompletionCallbackWrapper(this.nativeCommandsSender);
+    this.completionCallbackWrapper = new CompletionCallbackWrapper(
+      this.nativeCommandsSender
+    );
     this.uniqueIdProvider = new UniqueIdProvider();
     this.commands = new Commands(
       this.nativeCommandsSender,
       this.uniqueIdProvider,
       this.notificationFactory
     );
-    this.eventsRegistry = new EventsRegistry(this.nativeEventsReceiver, this.completionCallbackWrapper);
-    this.eventsRegistryIOS = new EventsRegistryIOS(this.nativeEventsReceiver, this.completionCallbackWrapper);
+    this.eventsRegistry = new EventsRegistry(
+      this.nativeEventsReceiver,
+      this.completionCallbackWrapper
+    );
+    this.eventsRegistryIOS = new EventsRegistryIOS(
+      this.nativeEventsReceiver,
+      this.completionCallbackWrapper
+    );
 
     this._ios = new NotificationsIOS(this.commands, this.eventsRegistryIOS);
     this._android = new NotificationsAndroid(this.commands);
@@ -66,6 +76,13 @@ export class NotificationsRoot {
   }
 
   /**
+   * getLastAction
+   */
+  public getLastAction(): Promise<Object | undefined> {
+    return this.commands.getLastAction();
+  }
+
+  /**
    * setCategories
    */
   public setCategories(categories: [NotificationCategory?]) {
@@ -74,7 +91,7 @@ export class NotificationsRoot {
 
   /**
    * cancelLocalNotification
-  */
+   */
   public cancelLocalNotification(notificationId: string) {
     return this.commands.cancelLocalNotification(notificationId);
   }
