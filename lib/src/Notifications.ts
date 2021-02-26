@@ -78,7 +78,7 @@ export class NotificationsRoot {
   /**
    * getLastAction
    */
-  public getLastAction(): Promise<Object | undefined> {
+  public getLastAction(): Promise<Notification | undefined> {
     return this.commands.getLastAction();
   }
 

@@ -35,11 +35,10 @@ export class Commands {
       });
   }
 
-  public async getLastAction(): Promise<Object | undefined> {
+  public async getLastAction(): Promise<Notification | undefined> {
     return this.nativeCommandsSender.getLastAction().then((payload) => {
       if (payload) {
-        return payload;
-        // return this.notificationFactory.fromPayload(payload);
+        return this.notificationFactory.fromPayload(payload);
       }
 
       return undefined;
