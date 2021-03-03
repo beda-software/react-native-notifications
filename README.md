@@ -1,6 +1,8 @@
 # Beda software: How to build
 
-- Clone this repo.
+If we'll use github url of this package in app's package.json, it'll fail because it need to have `dist` folder.
+
+- Clone this repo
 - Install all deps: `npm install`
 - `npm run build`
 - Chnage package version if needed and then `npm pack`, it will create `.tgz` package file
