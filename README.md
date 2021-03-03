@@ -1,5 +1,17 @@
+# Beda software: How to build
+
+- Clone this repo.
+- Install all deps: `npm install`
+- `npm run build`
+- Chnage package version if needed and then `npm pack`, it will create `.tgz` package file
+- Create new github [release](https://github.com/beda-software/react-native-notifications/releases/new) and attach there this `.tgz`
+- Publis release, copy a link to `.tgz` file, use it in your app's package file like this:
+
+```
+"react-native-notifications": "https://github.com/beda-software/react-native-notifications/releases/download/3.4.2-lastaction/react-native-notifications-3.4.2.tgz"
+```
+
 <h1 align="center">
-  <img src=".logo.png"/><br/>
   React Native Notifications
 </h1>
 
