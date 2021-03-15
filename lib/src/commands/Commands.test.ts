@@ -80,7 +80,7 @@ describe('Commands', () => {
 
   describe('setCategories', () => {
     it('sends to native', () => {
-      const emptyCategoriesArray: [NotificationCategory?] = [];
+      const emptyCategoriesArray: NotificationCategory[] = [];
       uut.setCategories(emptyCategoriesArray);
       verify(mockedNativeCommandsSender.setCategories(emptyCategoriesArray)).called();
     });
