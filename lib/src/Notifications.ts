@@ -85,7 +85,7 @@ export class NotificationsRoot {
   /**
    * setCategories
    */
-  public setCategories(categories: [NotificationCategory?]) {
+  public setCategories(categories: NotificationCategory[]) {
     this.commands.setCategories(categories);
   }
 
