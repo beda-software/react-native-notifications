@@ -10,7 +10,7 @@ If we'll use github url of this package in app's package.json, it'll fail becaus
 - Publis release, copy a link to `.tgz` file, use it in your app's package file like this:
 
 ```
-"react-native-notifications": "https://github.com/beda-software/react-native-notifications/releases/download/3.4.2-lastaction/react-native-notifications-3.4.2.tgz"
+"react-native-notifications": "https://github.com/beda-software/react-native-notifications/releases/download/3.4.2.3-typings/react-native-notifications-3.4.2.3-typings.tgz"
 ```
 
 <h1 align="center">
