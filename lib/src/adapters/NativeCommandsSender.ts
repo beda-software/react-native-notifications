@@ -1,5 +1,6 @@
 import { NativeModules } from "react-native";
 import { Notification } from "../DTO/Notification";
+import { NotificationLocal } from "../DTO/NotificationLocal";
 import { NotificationCompletion } from "../interfaces/NotificationCompletion";
 import { NotificationPermissions } from "../interfaces/NotificationPermissions";
 import { NotificationCategory } from "../interfaces/NotificationCategory";
@@ -8,7 +9,7 @@ import { NotificationChannel } from "../interfaces/NotificationChannel";
 interface NativeCommandsModule {
   getInitialNotification(): Promise<Object>;
   getLastAction(): Promise<Object>;
-  postLocalNotification(notification: Notification, id: number): void;
+  postLocalNotification(notification: NotificationLocal, id: number): void;
   requestPermissions(): void;
   abandonPermissions(): void;
   refreshToken(): void;
@@ -41,7 +42,7 @@ export class NativeCommandsSender {
     this.nativeCommandsModule = NativeModules.RNBridgeModule;
   }
 
-  postLocalNotification(notification: Notification, id: number) {
+  postLocalNotification(notification: NotificationLocal, id: number) {
     return this.nativeCommandsModule.postLocalNotification(notification, id);
   }
 

@@ -4,6 +4,7 @@ import { Commands } from "./commands/Commands";
 import { EventsRegistry } from "./events/EventsRegistry";
 import { EventsRegistryIOS } from "./events/EventsRegistryIOS";
 import { Notification } from "./DTO/Notification";
+import { NotificationLocal } from "./DTO/NotificationLocal";
 import { UniqueIdProvider } from "./adapters/UniqueIdProvider";
 import { CompletionCallbackWrapper } from "./adapters/CompletionCallbackWrapper";
 import { NotificationCategory } from "./interfaces/NotificationCategory";
@@ -64,7 +65,7 @@ export class NotificationsRoot {
   /**
    * postLocalNotification
    */
-  public postLocalNotification(notification: Notification, id?: number) {
+  public postLocalNotification(notification: NotificationLocal, id?: number) {
     return this.commands.postLocalNotification(notification, id);
   }
 
