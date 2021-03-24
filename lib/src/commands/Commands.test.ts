@@ -4,6 +4,7 @@ import { mock, verify, instance, when, anyNumber } from 'ts-mockito';
 import { Commands } from './Commands';
 import { NativeCommandsSender } from '../adapters/NativeCommandsSender';
 import { Notification } from '../DTO/Notification';
+import { NotificationLocal } from '../DTO/NotificationLocal';
 import { UniqueIdProvider } from '../adapters/UniqueIdProvider';
 import { NotificationCategory } from '../interfaces/NotificationCategory';
 import { NotificationPermissions } from '../interfaces/NotificationPermissions';
@@ -102,26 +103,26 @@ describe('Commands', () => {
 
   describe('postLocalNotification', () => {
     it('sends to native', () => {
-      const notification: Notification = new Notification({identifier: 'id'});
+      const notification: NotificationLocal = new NotificationLocal({identifier: 'id'});
       uut.postLocalNotification(notification);
       verify(mockedNativeCommandsSender.postLocalNotification(notification, anyNumber())).called();
     });
 
     it('generates unique identifier', () => {
-      const notification: Notification = new Notification({identifier: 'id'});
+      const notification: NotificationLocal = new NotificationLocal({identifier: 'id'});
       uut.postLocalNotification(notification);
       verify(mockedNativeCommandsSender.postLocalNotification(notification, anyNumber())).called();
     });
 
     it('use passed notification id', () => {
-      const notification: Notification = new Notification({identifier: 'id'});
+      const notification: NotificationLocal = new NotificationLocal({identifier: 'id'});
       const passedId: number = 2;
       uut.postLocalNotification(notification, passedId);
       verify(mockedNativeCommandsSender.postLocalNotification(notification, passedId)).called();
     });
 
     it('return notification id', () => {
-      const notification: Notification = new Notification({identifier: 'id'});
+      const notification: NotificationLocal = new NotificationLocal({identifier: 'id'});
       const notificationId: number = 2;
       const response = uut.postLocalNotification(notification, notificationId);
       expect(response).toEqual(notificationId);

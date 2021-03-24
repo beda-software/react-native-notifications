@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import { NativeCommandsSender } from "../adapters/NativeCommandsSender";
 import { Notification } from "../DTO/Notification";
+import { NotificationLocal } from "../DTO/NotificationLocal";
 import { NotificationCategory } from "../interfaces/NotificationCategory";
 import { NotificationChannel } from "../interfaces/NotificationChannel";
 import { NotificationPermissions } from "../interfaces/NotificationPermissions";
@@ -14,7 +15,7 @@ export class Commands {
     private readonly notificationFactory: NotificationFactory
   ) {}
 
-  public postLocalNotification(notification: Notification, id?: number) {
+  public postLocalNotification(notification: NotificationLocal, id?: number) {
     const notificationId: number = id ? id : this.uniqueIdProvider.generate();
     this.nativeCommandsSender.postLocalNotification(
       notification,
